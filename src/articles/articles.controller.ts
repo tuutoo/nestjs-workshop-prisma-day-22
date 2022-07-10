@@ -1,3 +1,4 @@
+import { PrismaClientExceptionFilter } from './../prisma-client-exception.filter';
 import {
   Controller,
   Get,
@@ -8,6 +9,7 @@ import {
   Delete,
   NotFoundException,
   ParseIntPipe,
+  UseFilters,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -17,6 +19,7 @@ import { ArticleEntity } from './entities/article.entity';
 
 @Controller('articles')
 @ApiTags('articles')
+@UseFilters(PrismaClientExceptionFilter)
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
